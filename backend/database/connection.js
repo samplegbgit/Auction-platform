@@ -6,9 +6,9 @@ export const connection = () => {
       dbName: "MERN_AUCTION_PLATFORM",
     })
     .then(() => {
-      console.log("Connected to database.");
+      console.log("Connected successfully to database.");
     })
-    .catch((err) => {
-      console.log(`Some error occured while connecting to database: ${err}`);
+    .catch((error) => {
+      console.log(`Some error occured while connecting to database: ${error}`);
     });
 };
