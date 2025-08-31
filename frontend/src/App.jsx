@@ -22,17 +22,23 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Contact from "./pages/Contact";
 import UserProfile from "./pages/UserProfile";
 
+// New: Optional - using v6's useNavigate hook in case you want programmatic routing later
+// import { useNavigate } from "react-router-dom";
+
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(getAllAuctionItems());
     dispatch(fetchLeaderboard());
-  }, []);
+  }, [dispatch]); // Add dispatch to dependencies for best practice
+
   return (
     <Router>
       <SideDrawer />
       <Routes>
+        {/* Core navigation routes */}
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -40,11 +46,15 @@ const App = () => {
         <Route path="/how-it-works-info" element={<HowItWorks />} />
         <Route path="/about" element={<About />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+
+        {/* Auction-related routes */}
         <Route path="/auctions" element={<Auctions />} />
         <Route path="/auction/item/:id" element={<AuctionItem />} />
         <Route path="/create-auction" element={<CreateAuction />} />
         <Route path="/view-my-auctions" element={<ViewMyAuctions />} />
         <Route path="/auction/details/:id" element={<ViewAuctionDetails />} />
+
+        {/* User and support pages */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/me" element={<UserProfile />} />
